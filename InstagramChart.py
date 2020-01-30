@@ -7,35 +7,59 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-URL = "https://www.instagram.com/{}/"
+IGURL = "https://www.instagram.com/{}/"
 
 
-def scrape(username):
-    fullUrl = URL.format(username)
+def findDataInIG(igAccountName):
+    fullUrl = IGURL.format(igAccountName)
     urlRead = urllib.request.urlopen(fullUrl).read()
     soup = BeautifulSoup(urlRead, 'html.parser')
 
-    metaTag = soup.find('meta', attrs={'property': 'og:description'})
-    text = metaTag.attrs['content']
-    main_text = text.split("-")[0]
+    metaTag = soup.find('meta', attrs={'name': 'description'})
+    numericValues = findNumbers(metaTag)
 
-    return main_text
-
-name = "eye.tattoo.girl"
-data = scrape(name)
-print(data)
+    return numericValues
 
 
-objects = ('Python', 'C++', 'Java', 'Perl', 'Scala', 'Lisp')
-y_pos = np.arange(len(objects))
-performance = [10,8,6,4,2,1]
+def findNumbers(metaTag):
+    rawText = metaTag.attrs['content']
+    dataTextList = (rawText.split("-")[0]).split(" ")
+    numericValues = []
 
-plt.bar(y_pos, performance, align='center', alpha=0.5)
-plt.xticks(y_pos, objects)
-plt.ylabel('Usage')
-plt.title('Programming language usage')
+    for i in dataTextList:
+        if str.isdigit(i):
+            numericValues.append(int(i))
+
+    return numericValues
+
+# def drawBarChart():
+
+IGACCOUNTNAME = "eye.tattoo.girl"
+
+X_data = ("Followers", "Following", "Posts")
+y_data = findDataInIG(IGACCOUNTNAME)
+y_pos = np.arange(len(X_data))
+
+plt.bar(y_pos, y_data, align='center', alpha=0.5)
+plt.xticks(y_pos, X_data)
+plt.ylabel('Count')
+plt.title('Your Instagram Account Info')
 
 plt.show()
+
+
+
+
+# objects = ('Followers', 'Following', 'Posts')
+# y_pos = np.arange(len(objects))
+# performance = [10,8,6,4,2,1]
+#
+# plt.bar(y_pos, performance, align='center', alpha=0.5)
+# plt.xticks(y_pos, objects)
+# plt.ylabel('Usage')
+# plt.title('Programming language usage')
+#
+# plt.show()
 
 
 
