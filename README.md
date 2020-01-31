@@ -14,7 +14,7 @@ Assign the account to `IGACCOUNTNAME` to run the project with a desired account
 
     Find followers, following and posts of a given public Instagram account. Account name is passed as a parameter.
 
-    `igAccountName`: Instagram account username
+   `igAccountName`: Instagram account username
 
     eg: eye.tattoo.girl
 
@@ -22,7 +22,7 @@ Assign the account to `IGACCOUNTNAME` to run the project with a desired account
 
     If the numeric values contain m, k or ',', convert them to int values
 
-    `numericValue`: Raw string values of numeric data
+   `numericValue`: Raw string values of numeric data
 
     eg: 1.3m, 1,340, 13k
 
@@ -31,7 +31,9 @@ Assign the account to `IGACCOUNTNAME` to run the project with a desired account
     Draw the bar chart.
 
     `y_data`: A list of numbers of followers, following and posts
+    
     `fetchedData`: The raw strings of followers, following and posts inclusing 'm', 'k', and ','
+    
     `igAccount`: Instagram account username
     
     
