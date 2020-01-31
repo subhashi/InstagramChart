@@ -1,4 +1,4 @@
-# Instragram Data to Chart
+# Instragram Account Data to Chart
 
 Draw a bar chart of a given public Instagram account
 
